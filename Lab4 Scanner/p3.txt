@@ -1,0 +1,8 @@
+List(Number) numbers <- [-1, -2, 3, 4, 5];
+Number sum <- 0;
+
+while Number n in numbers do
+	sum <- sum + n;
+done
+
+return sum;

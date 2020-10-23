@@ -1,0 +1,18 @@
+
+Number 1n, 2n, 3n;				// Lexical error -> a variable shouldn't start with letter
+
+1n <- 123;
+2n <- 12;
+3n <- 023;						// Lexical error -> number shouldn't start with 0
+
+Number maxNr <- 3n;
+
+if 1n > maxNr then
+	maxNr <- 1n;
+done
+								
+if 2n > maxNr then
+	maxNr <- 2n;
+done
+
+return maxNr
