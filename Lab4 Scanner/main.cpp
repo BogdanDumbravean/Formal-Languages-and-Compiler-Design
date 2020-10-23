@@ -7,6 +7,5 @@ using namespace std;
 
 int main() {
     Scanner scanner;
-    
-    cout << scanner.scan("token.in", "p1err.txt", "PIF.out", "ST.out");
+    cout << scanner.scan("token.in", "p2.txt", "PIF.out", "ST.out");
 }

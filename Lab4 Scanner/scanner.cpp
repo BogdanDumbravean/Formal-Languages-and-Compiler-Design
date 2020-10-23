@@ -53,7 +53,7 @@ bool Scanner::addWordToPif(const string word) {
 
     if (tokens.find(word) != tokens.end()) {
         pif.push_back({ word, -1 });
-        //cout << "found token: " + word << '\n';
+        
         return isCorrect;
     }
 
@@ -63,15 +63,12 @@ bool Scanner::addWordToPif(const string word) {
     for (auto const& x : tokens) {
         size_t pos = word.find(x.first);
         if (x.first.size() > 1 && pos != string::npos) {
-            //std::cout << "x: " << x.first << '\n';
-            aux = split(word, x.first);
-
-            for (int i = 0; i < aux.size(); ++i)
-                if (aux[i] != "") {
-                    if (!addWordToPif(aux[i]))
-                        isCorrect = false;
-                    pif.push_back({ x.first, -1 });
-                }
+            if (pos != 0)
+                addWordToPif(word.substr(0, pos));
+            pif.push_back({ x.first, -1 });
+            int start = pos + x.first.size();
+            if (start != word.size())
+                addWordToPif(word.substr(start, string::npos));
             return isCorrect;
         }
     }
@@ -80,16 +77,28 @@ bool Scanner::addWordToPif(const string word) {
     for (auto const& x : tokens) {
         size_t pos = word.find(x.first);
         if(x.first.size() == 1 && pos != string::npos) {
+            if (pos != 0)
+                addWordToPif(word.substr(0, pos));
 
-            aux = split(word, x.first);
-            //addWordToPif(aux[0]);
-            //pif.insert({ word, -1 });
-            for (int i = 0; i < aux.size(); ++i) 
-                if(aux[i] != ""){
-                    if (!addWordToPif(aux[i]))
-                        isCorrect = false;
-                    pif.push_back({ x.first, -1 });
+            int start = pos + x.first.size();
+            if (x.first == "-" || x.first == "+") {
+                if (pif.size() == 0)
+                    start--;
+                else {
+                    string pred = pif.back().first;
+                    if (pif.back().second != -1 || pred == ")" || pred == "]")
+                        pif.push_back({ x.first, -1 });
+                    else
+                        start--;
                 }
+            } 
+            else
+                pif.push_back({ x.first, -1 });
+
+            if (start == 0)
+                continue;
+            if (start != word.size())
+                addWordToPif(word.substr(start, string::npos));
             return isCorrect;
         }
     }
@@ -127,7 +136,6 @@ string Scanner::scan(string tokenFile, string programFile, string pifFile, strin
         }
         lineNr++;
     }
-    vector<string> result; 
 
     write(pifFile, stFile);
     pin.close();
