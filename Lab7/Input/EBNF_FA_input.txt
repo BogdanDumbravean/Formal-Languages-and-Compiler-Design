@@ -1,0 +1,16 @@
+EBNF
+
+Character := Alphanumeric | "_"
+Alphanumeric := "0" | .. | "9" | Letter
+Letter := "a" | … | ‘z’ | "A" | … | "Z" 
+Space := “ “
+
+State := Letter{Alphanumeric}
+
+States := State Space {State Space} "\n"
+Alphabet := Character Space {Character Space} "\n"
+InitialState := State "\n"
+FinalStates := State Space {State Space} "\n"
+Transitions := {State Space Letter Space State "\n"}
+
+Specification := States Alphabet InitialState FinalStates Transitions

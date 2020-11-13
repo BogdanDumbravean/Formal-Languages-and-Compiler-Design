@@ -1,0 +1,18 @@
+
+Number n1, n2, n3;
+
+n1 <- 123;
+n2 <- 12;
+n3 <- 23;
+
+Number maxNr <- n3;
+
+if n1 > maxNr then
+	maxNr <- n1;
+done
+
+if n2 > maxNr then
+	maxNr <- n2;
+done
+
+return maxNr;
