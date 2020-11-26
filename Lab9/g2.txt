@@ -1,0 +1,29 @@
+program stmtlist stmt simplstmt structstmt decllist type declarationlist declaration assignstmt elem expression arrayelem type1 arraytype iostmt returnstmt ifstmt whilestmt condition endifstmt condition1 logicalop factor arithmeticop RELATION multipleDigits multipleUnderscores multipleCharacters letter digit character non_zero_digit
+; , <- [ ] Boolean Number String List ( ) Dict read write return if then done else else_if do while in not < <= = <> >= > + - * / % or and CONSTCHAR CONSTINT IDENTIFIER
+program
+program->stmtlist
+stmtlist->stmt|stmt stmtlist
+stmt->simplstmt ;|structstmt
+decllist->type declarationlist ;
+declarationlist->declaration | declaration , declarationlist
+declaration->IDENTIFIER | assignstmt
+assignstmt->elem <- expression
+elem->IDENTIFIER | arrayelem
+arrayelem->IDENTIFIER [ IDENTIFIER ] | IDENTIFIER [ CONSTINT ]
+type->type1 | arraytype
+type1->Boolean | Number | String
+arraytype->List ( type1 ) | Dict ( type1 )
+simplstmt->assignstmt | iostmt | returnstmt
+iostmt->read ( elem ) | write ( elem ) | write ( CONSTCHAR )
+returnstmt->return | return elem | return CONSTINT
+structstmt->decllist | ifstmt | whilestmt
+ifstmt->if condition then stmtlist endifstmt
+endifstmt->done | else stmtlist done | else if condition do stmtlist endifstmt
+whilestmt->while condition do stmtlist done | while IDENTIFIER in IDENTIFIER do stmtlist done | while type IDENTIFIER in IDENTIFIER do stmtlist done
+condition->condition1 | not condition1 | condition1 logicalop condition1
+condition1->expression RELATION expression | expression
+expression->factor arithmeticop factor | factor
+factor->( condition ) | IDENTIFIER | IDENTIFIER [ IDENTIFIER ] | IDENTIFIER [ CONSTINT ] | CONSTINT
+RELATION->< | <= | = | <> | >= | >
+arithmeticop->+ | - | * | / | %
+logicalop->or | and
