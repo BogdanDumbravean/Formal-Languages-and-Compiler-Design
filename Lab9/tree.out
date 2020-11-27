@@ -1,0 +1,325 @@
+program
+Left child: stmtlist
+
+stmtlist
+Left child: stmt
+
+stmt stmtlist
+
+stmtlist
+Left child: structstmt
+
+structstmt
+Left child: decllist
+
+decllist
+Left child: type
+
+type declarationlist ;
+
+;
+Left child: type1
+
+type1
+Left child: Number
+
+Number
+Left child: declaration
+
+declaration , declarationlist
+
+declarationlist
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: declaration
+
+declaration , declarationlist
+
+declarationlist
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: declaration
+
+declaration
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: stmt
+
+stmt stmtlist
+
+stmtlist
+Left child: simplstmt
+
+simplstmt ;
+
+;
+Left child: assignstmt
+
+assignstmt
+Left child: elem
+
+elem <- expression
+
+expression
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: factor
+
+factor
+Left child: CONSTINT
+
+CONSTINT
+Left child: stmt
+
+stmt stmtlist
+
+stmtlist
+Left child: simplstmt
+
+simplstmt ;
+
+;
+Left child: assignstmt
+
+assignstmt
+Left child: elem
+
+elem <- expression
+
+expression
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: factor
+
+factor
+Left child: CONSTINT
+
+CONSTINT
+Left child: stmt
+
+stmt stmtlist
+
+stmtlist
+Left child: simplstmt
+
+simplstmt ;
+
+;
+Left child: assignstmt
+
+assignstmt
+Left child: elem
+
+elem <- expression
+
+expression
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: factor
+
+factor
+Left child: CONSTINT
+
+CONSTINT
+Left child: stmt
+
+stmt stmtlist
+
+stmtlist
+Left child: structstmt
+
+structstmt
+Left child: decllist
+
+decllist
+Left child: type
+
+type declarationlist ;
+
+;
+Left child: type1
+
+type1
+Left child: Number
+
+Number
+Left child: declaration
+
+declaration
+Left child: assignstmt
+
+assignstmt
+Left child: elem
+
+elem <- expression
+
+expression
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: factor
+
+factor
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: stmt
+
+stmt stmtlist
+
+stmtlist
+Left child: structstmt
+
+structstmt
+Left child: ifstmt
+
+ifstmt
+Left child: if
+
+if condition then stmtlist endifstmt
+
+endifstmt
+Left child: condition1
+
+condition1
+Left child: expression
+
+expression RELATION expression
+
+expression
+Left child: factor
+
+factor
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: >
+
+>
+Left child: factor
+
+factor
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: stmt
+
+stmt
+Left child: simplstmt
+
+simplstmt ;
+
+;
+Left child: assignstmt
+
+assignstmt
+Left child: elem
+
+elem <- expression
+
+expression
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: factor
+
+factor
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: done
+
+done
+Left child: stmt
+
+stmt stmtlist
+
+stmtlist
+Left child: structstmt
+
+structstmt
+Left child: ifstmt
+
+ifstmt
+Left child: if
+
+if condition then stmtlist endifstmt
+
+endifstmt
+Left child: condition1
+
+condition1
+Left child: expression
+
+expression RELATION expression
+
+expression
+Left child: factor
+
+factor
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: >
+
+>
+Left child: factor
+
+factor
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: stmt
+
+stmt
+Left child: simplstmt
+
+simplstmt ;
+
+;
+Left child: assignstmt
+
+assignstmt
+Left child: elem
+
+elem <- expression
+
+expression
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: factor
+
+factor
+Left child: IDENTIFIER
+
+IDENTIFIER
+Left child: done
+
+done
+Left child: stmt
+
+stmt
+Left child: simplstmt
+
+simplstmt ;
+
+;
+Left child: returnstmt
+
+returnstmt
+Left child: return
+
+return elem
+
+elem
+Left child: IDENTIFIER
+
+IDENTIFIER
+

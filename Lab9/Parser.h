@@ -9,7 +9,7 @@ using namespace std;
 class Element {
 public:
 	string val;
-	int productionNr; // -1 for terminals
+	int productionNr;
 
 	Element(string _val = "", int _productionNr = 0) : val{ _val }, productionNr{ _productionNr } {}
 };

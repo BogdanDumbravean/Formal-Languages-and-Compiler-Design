@@ -5,21 +5,21 @@ void Parser::Expand() {
 	// if top(beta) is nonterminal
 	Element el = beta.top();
 	el.productionNr = 1;
-	alpha.push(el); //cout << "push alpha: " << el.val << ' ' << el.productionNr << '\n';
+	alpha.push(el); 
 	beta.pop();
 
 	vector<vector<string>> results = g.GetNonterminalProductions(el.val).results;
 
 	for (int i = results[0].size() - 1; i >= 0; --i) {
 		string s = results[0][i];
-		beta.push(Element(s)); //cout << "push beta: " << s << ' ' << 0 << '\n';
+		beta.push(Element(s)); 
 	}
 }
 
 void Parser::Advance() {
 	// when top(beta) == current symbol from input
-	index++;
-	alpha.push(beta.top()); //cout << "push alpha: " << beta.top().val << ' ' << beta.top().productionNr << '\n';
+	index++; 
+	alpha.push(beta.top()); 
 	beta.pop();
 }
 
@@ -31,7 +31,7 @@ void Parser::MomentaryInsucces() {
 void Parser::Back() {
 	// when top(alpha) is terminal
 	index--;
-	beta.push(alpha.top()); //cout << "push beta: " << alpha.top().val << ' ' << alpha.top().productionNr << '\n';
+	beta.push(alpha.top()); 
 	alpha.pop();
 }
 
@@ -39,8 +39,8 @@ void Parser::AnotherTry() {
 	// when top(alpha) is nonterminal
 	Element el = alpha.top();
 	if (index == 0 && el.val.compare(start.val) == 0) {
-		state = 'e';
 		cout << "Error! " << state << ' ' << index << ' ' << el.val << ' ' << el.productionNr << '\n';
+		state = 'e';
 		return;
 	}
 	vector<vector<string>> results = g.GetNonterminalProductions(el.val).results;
@@ -49,15 +49,15 @@ void Parser::AnotherTry() {
 		beta.pop();
 	if (results.size() == el.productionNr) {
 		el.productionNr = 0;
-		beta.push(el); //cout << "push beta: " << el.val << ' ' << el.productionNr << '\n';
+		beta.push(el); 
 	}
 	else {
 		state = 'q';
 		el.productionNr++;
-		alpha.push(el); //cout << "push alpha: " << el.val << ' ' << el.productionNr << '\n';
+		alpha.push(el); 
 		for (int i = results[el.productionNr - 1].size() - 1; i >= 0; --i) {
 			string s = results[el.productionNr - 1][i];
-			beta.push(Element(s)); //cout << "push beta: " << s << ' ' << 0 << '\n';
+			beta.push(Element(s)); 
 		}
 	}
 }
@@ -80,7 +80,7 @@ bool Parser::Solve(vector<string> seq) {
 	start = Element(g.GetStartingSymbol());
 	alpha = stack<Element>();
 	beta = stack<Element>();
-	beta.push(start); //cout << "push beta: " << g.GetStartingSymbol() << ' ' << 0 << '\n';
+	beta.push(start); 
 
 	while (state != 'f' && state != 'e') { 
 
@@ -88,6 +88,10 @@ bool Parser::Solve(vector<string> seq) {
 			if (beta.empty() && index == sequence.size())
 				Succes();
 			else {
+				if (beta.empty()) {
+					MomentaryInsucces();
+					continue;
+				}
 				Element top = beta.top();
 				if (IsNonterminal(top.val))
 					Expand();
@@ -120,11 +124,3 @@ vector<Element> Parser::GetProductionString() {
 	reverse(aux.begin(), aux.end());
 	return aux;
 }
-
-//
-//void Parser::printState() {
-//	//if (state != 'q' || index != 0) 
-//	cout << state << ' ' << index << ' ' << '\n' << "alpha:\n";
-//	for (const auto& x : alpha)
-//		cout << x << ' ';
-//}

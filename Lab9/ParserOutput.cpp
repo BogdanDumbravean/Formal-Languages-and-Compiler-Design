@@ -39,9 +39,9 @@ void ParserOutput::LeftChildRightSibling(vector<Element> productionString) {
 	treeHead;
 }
 
-void ParserOutput::PrintNodeToConsole(Node* node) {
+void ParserOutput::PrintNodeToConsole(Node* node, ostream& out) {
 	queue<Node*> next;
-	cout << node->val;
+	out << node->val;
 
 	if (node->leftChild != nullptr)
 		next.push(node->leftChild);
@@ -49,22 +49,28 @@ void ParserOutput::PrintNodeToConsole(Node* node) {
 	Node* aux = node;
 	while (aux->rightSibling != nullptr) {
 		aux = aux->rightSibling;
-		cout << ' ' << aux->val;
+		out << ' ' << aux->val;
 
 		if (aux->leftChild != nullptr)
 			next.push(aux);
 	}
-	cout << '\n';
+	out << '\n';
 	if (node->leftChild != nullptr)
-		cout << "Left child: " << node->leftChild->val << '\n';
-	cout << '\n';
+		out << "Left child: " << node->leftChild->val << '\n';
+	out << '\n';
 
 	while (!next.empty()) {
-		PrintNodeToConsole(next.front());
+		PrintNodeToConsole(next.front(), out);
 		next.pop();
 	}
 }
 
 void ParserOutput::PrintToConsole() {
-	PrintNodeToConsole(treeHead);
+	PrintNodeToConsole(treeHead, cout);
+}
+
+void ParserOutput::WriteToFile(string path) {
+	ofstream fout(path);
+	PrintNodeToConsole(treeHead, fout);
+	fout.close();
 }

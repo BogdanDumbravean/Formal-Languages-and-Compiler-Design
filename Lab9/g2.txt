@@ -1,4 +1,4 @@
-program stmtlist stmt simplstmt structstmt decllist type declarationlist declaration assignstmt elem expression arrayelem type1 arraytype iostmt returnstmt ifstmt whilestmt condition endifstmt condition1 logicalop factor arithmeticop RELATION multipleDigits multipleUnderscores multipleCharacters letter digit character non_zero_digit
+program stmtlist stmt simplstmt structstmt decllist type declarationlist declaration assignstmt elem expression arrayelem type1 arraytype iostmt returnstmt ifstmt whilestmt condition endifstmt condition1 logicalop factor arithmeticop RELATION multipleDigits multipleUnderscores multipleCharacters letter digit character non_zero_digit factorList
 ; , <- [ ] Boolean Number String List ( ) Dict read write return if then done else else_if do while in not < <= = <> >= > + - * / % or and CONSTCHAR CONSTINT IDENTIFIER
 program
 program->stmtlist
@@ -23,7 +23,8 @@ whilestmt->while condition do stmtlist done | while IDENTIFIER in IDENTIFIER do 
 condition->condition1 | not condition1 | condition1 logicalop condition1
 condition1->expression RELATION expression | expression
 expression->factor arithmeticop factor | factor
-factor->( condition ) | IDENTIFIER | IDENTIFIER [ IDENTIFIER ] | IDENTIFIER [ CONSTINT ] | CONSTINT
+factor->( condition ) | IDENTIFIER | IDENTIFIER [ IDENTIFIER ] | IDENTIFIER [ CONSTINT ] | CONSTINT | [ factorList ]
+factorList-> factor | factor , factorList
 RELATION->< | <= | = | <> | >= | >
 arithmeticop->+ | - | * | / | %
 logicalop->or | and

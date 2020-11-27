@@ -3,6 +3,7 @@
 #include <queue>
 #include <string>
 #include <iostream>
+#include <fstream>
 #include "Node.h"
 #include "Parser.h"
 
@@ -15,7 +16,7 @@ private:
 	Grammar g;
 
 	void ParseNode(Node* node, const vector<Element> productionString, int& index);
-	void PrintNodeToConsole(Node* node);
+	void PrintNodeToConsole(Node* node, ostream& out);
 public:
 	ParserOutput(Grammar _g) : g{ _g } {}
 	~ParserOutput() {
@@ -26,6 +27,6 @@ public:
 
 	void LeftChildRightSibling(vector<Element> productionString);
 	void PrintToConsole();
-
+	void WriteToFile(string path);
 };
 
